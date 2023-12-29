@@ -1,13 +1,15 @@
 const express = require('express');
 const app = express();
 const mongoose  = require('mongoose');
+require('dotenv').config();
+const PORT = process.ENV.PORT || 3000;
 
 
 app.get('/data',(req,res)=> {
   return res.send("hello js")
 });
 
-mongoose.connect('mongodb+srv://amit_singh:kya_hal_hai_tere@cluster0.jpqo2bq.mongodb.net/HAYAT_NEW_DB',,{
+mongoose.connect('mongodb+srv://amit_singh:kya_hal_hai_tere@cluster0.jpqo2bq.mongodb.net/HAYAT_NEW_DB',{
     useNewUrlParser: true,
         useUnifiedTopology: true,
   }).then(()=> {
