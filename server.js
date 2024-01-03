@@ -37,17 +37,17 @@ app.get('/api/users', (req, res) => {
   res.json({ users, total: data.length });
 });
 
-mongoose
-  .connect(DB_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    console.log('Mongodb connected');
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+// mongoose
+//   .connect(DB_URL, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   })
+//   .then(() => {
+//     console.log('Mongodb connected');
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
 
 app.listen(Port, () => {
   console.log(`Server  is running on Port ${Port}`);

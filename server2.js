@@ -1,9 +1,9 @@
-
 //  this server is not using mongoDB for pagination
 
 const express = require('express');
 require('dotenv').config();
 const app = express();
+const dbConnect = require('./dbConnect');
 const port = process.env.PORT || 5500;
 
 const users = [
@@ -15,6 +15,12 @@ const users = [
   { id: 6, name: 'user6' },
   { id: 7, name: 'user7' },
 ];
+
+app.get('/data', (req, res) => {
+  console.log(dbConnect());
+
+  return 'working';
+});
 
 app.get('/users', (req, res) => {
   const page = parseInt(req.query.page);
