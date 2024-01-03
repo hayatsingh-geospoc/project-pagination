@@ -11,4 +11,8 @@ const dbConnect = () => {
   mongoose.connection.on('Error', (err) => {
     console.log('Error while connecting to Database', err);
   });
+
+  mongoose.connection.on('Disconnected', () => {
+    console.log('MongoDb connection disconnected');
+  });
 };
