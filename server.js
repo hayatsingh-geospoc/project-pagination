@@ -9,6 +9,8 @@ const DB_URL = process.env.DB_URL;
 app.use(express.json());
 app.use(cors());
 
+
+
 app.get('/data', (req, res) => {
   return res.send('hello js');
 });
