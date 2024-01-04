@@ -1,2 +1,0 @@
-
-GET http://localhost:5500/users?page=3&limit=5

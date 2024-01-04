@@ -1,56 +1,36 @@
+//  this server is not using mongoDB for pagination
+
 const express = require('express');
-const app = express();
-const mongoose = require('mongoose');
-const cors = require('cors');
 require('dotenv').config();
-const Port = process.env.PORT || 3000;
+const app = express();
+const dbConnect = require('./dbConnect.js');
+const port = process.env.PORT || 5500;
 const DB_URL = process.env.DB_URL;
 
-app.use(express.json());
-app.use(cors());
+const jsonData = require('./config/config.json');
+const movieName = require('../model/Movie.js');
 
+console.log(DB_URL);
 
-
-app.get('/data', (req, res) => {
-  return res.send('hello js');
+mongoose.connect(DB_URL, { useNewUrlParser: true }, () => {
+  console.log('database connected successfully');
 });
 
-const data = [
-  { id: 1, name: 'John Doe', age: 25 },
-  { id: 2, name: 'Jane Doe', age: 30 },
-  { id: 3, name: 'Bob Smith', age: 40 },
-  { id: 4, name: 'Alice Brown', age: 20 },
-  { id: 5, name: 'Mike Johnson', age: 35 },
-  { id: 6, name: 'Sara Lee', age: 28 },
-  { id: 7, name: 'David Green', age: 45 },
-  { id: 8, name: 'Emily Davis', age: 32 },
-  { id: 9, name: 'Tom Wilson', age: 27 },
-  { id: 10, name: 'Linda Wilson', age: 33 },
-];
+const dataInsert = () => {
+  jsonData.forEach(async (data) => {
+    const newItem = new movieName(data);
+    await newItem.save();
+  });
+};
 
-const pageSize = 5;
+dataInsert();
 
-app.get('/api/users', (req, res) => {
-  const pageNumber = req.query.page || 1; // Get the current page number from the query parameters
-  const startIndex = (pageNumber - 1) * pageSize;
-  const endIndex = startIndex + pageSize;
-  const users = data.slice(startIndex, endIndex);
+// app.get('/data', (req, res) => {
+//   console.log(dbConnect());
 
-  res.json({ users, total: data.length });
-});
+//   return 'working';
+// });
 
-// mongoose
-//   .connect(DB_URL, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//   })
-//   .then(() => {
-//     console.log('Mongodb connected');
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
-
-app.listen(Port, () => {
-  console.log(`Server  is running on Port ${Port}`);
+app.listen(port, () => {
+  console.log(`server is running on ${port}`);
 });
