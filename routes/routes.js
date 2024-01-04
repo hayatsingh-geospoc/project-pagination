@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const Movie = require('../models/Movie');
-const movies = require('../config/movies.json');
+const Movie = require('../model/Movie.js');
+const movies = require('../config/config.json');
 
 router.get('/movies', async (req, res) => {
   try {
@@ -62,18 +62,5 @@ router.get('/movies', async (req, res) => {
     res.status(500).json({ error: true, message: 'Internal Server Error' });
   }
 });
-
-// const insertMovies = async () => {
-//     try {
-//         const docs = await Movie.insertMany(movies);
-//         return Promise.resolve(docs);
-//     } catch (err) {
-//         return Promise.reject(err)
-//     }
-// };
-
-// insertMovies()
-//     .then((docs) => console.log(docs))
-//     .catch((err) => console.log(err))
 
 module.exports = router;

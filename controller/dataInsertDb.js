@@ -4,7 +4,6 @@ const movieName = require('../model/Movie.js');
 //console.log(jsonData, 'jsonData');
 
 const dataInsert = () => {
-  console.log('working');
   jsonData.forEach(async (itemData) => {
     const newItem = new movieName(itemData);
     await newItem.save();
