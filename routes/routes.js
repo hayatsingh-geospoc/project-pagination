@@ -22,13 +22,13 @@ router.get('/movies', async (req, res) => {
       'Music',
       'Family',
     ];
+    console.log(genre, req.query.genre.split(','));
+    genre === 'All' ? (genre = [...genreOptions]) : (genre = req.query.genre.split(','));
 
-    genre === 'All'
-      ? (genre = [...genreOptions])
-      : (genre = req.query.genre.split(','));
     req.query.sort ? (sort = req.query.sort.split(',')) : (sort = [sort]);
 
     let sortBy = {};
+    
     if (sort[1]) {
       sortBy[sort[0]] = sort[1];
     } else {
