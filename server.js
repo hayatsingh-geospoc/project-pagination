@@ -13,6 +13,9 @@ const routes = require('./routes/routes.js');
 app.use(express.json());
 
 app.use('/api', routes);
+app.get('/test', (req, res) => {
+  return res.send('testing');
+});
 
 mongoose
   .connect(DB_URL, { useNewUrlParser: true })
